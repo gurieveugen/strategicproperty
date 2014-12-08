@@ -1,0 +1,92 @@
+#header{
+	padding: 30px 0 25px
+}
+#header .logo{
+	margin: 0 0 28px
+}
+.main-navigation{
+	display: block !important
+}
+.main-nav{
+	border: none
+}
+.main-nav li{
+	border: none;
+	display: inline-block;
+	vertical-align: top
+}
+.b-box-info.b-box-info_size-4{
+	width: 583px;
+	height: 545px;
+	font-size: 43px;
+	line-height: 67px
+}
+.b-box-info.b-box-info_size-4 .text-holder{
+	padding: 40px
+}
+.b-box-info.b-box-info_size-4 p{
+	margin: 0 0 20px
+}
+.b-boxes-holder{
+	width: 583px;
+	margin: 0 auto -18px
+}
+.b-boxes-holder>.holder{
+	margin-right: -20px
+}
+.b-boxes-holder .b-box-info{
+	float: left;
+	margin: 0 18px 18px 0
+}
+.b-boxes-holder .b-box-info.b-box-info_size-4{
+	float: none;
+	margin: 0 0 18px
+}
+.b-boxes-holder .b-box-info.b-box-info_container{
+	float: none;
+	margin: 0
+}
+.main-content{
+	padding: 15px;
+	margin: 0
+}
+.main-content.left{
+	width: 420px;
+}
+.main-sidebar{
+	width: 282px;
+	margin: 0
+}
+.main-sidebar .b-box-info{
+	margin-top: 18px
+}
+.main-sidebar .b-box-info:first-child{
+	margin-top: 0
+}
+.b-box-visual{
+	width: 583px;
+	height: 545px
+}
+.b-box-visual h1{
+	padding: 20px 32px;
+	font-size: 47px;
+	line-height: 1.2
+}
+.b-c-holder{
+	width: 583px;
+	margin: 0 auto
+}
+.b-box-visual{
+	padding: 46px 48px
+}
+.b-box-visual h1{
+	display: inline-block
+}
+.b-box-contact{
+	float: left;
+	margin: 0 19px 0 0
+}
+.b-map{
+	float: left;
+	margin: 0
+}

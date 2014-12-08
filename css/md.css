@@ -1,0 +1,35 @@
+.b-boxes-holder{
+	width: auto;
+	margin: 0 0 -18px;
+	position: relative
+}
+.b-boxes-holder .b-box-info.b-box-info_size-4{
+	float: left;
+	margin: 0 18px 18px 0
+}
+.b-boxes-holder .b-box-info.b-box-info_container{
+	float: left;
+	width: 600px
+}
+.main-content{
+	padding: 18px 37px
+}
+.main-content.left{
+	width: 862px;
+}
+.b-box-visual{
+	float: left;
+	margin: 0 17px 0 0
+}
+.b-c-holder{
+	float: left;
+	width: auto;
+	margin: 0
+}
+.b-box-contact{
+	float: left;
+	margin: 0 17px 0 0
+}
+.b-map{
+	float: left
+}
