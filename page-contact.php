@@ -17,8 +17,27 @@
 			</div>
 		</div>
 		<div class="b-map">
-			<img src="<?php echo TDU; ?>/images/map.png" alt="">
+			<?php echo do_shortcode('[gmap]'); ?>
 		</div>
 	</div>
+	<script>
+		google.maps.event.addDomListener(window, 'load', initializeGMap);
+		function initializeGMap() 
+		{
+			var myLatlng = new google.maps.LatLng(jQuery('#map-canvas').data('lat'), jQuery('#map-canvas').data('lng'));
+			var mapOptions = {
+				zoom: 14,
+				center: myLatlng,
+				disableDefaultUI: true
+			}
+			var map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+
+			var marker = new google.maps.Marker({
+				position: myLatlng,
+				map: map,
+				title: 'My location!'
+			});
+		}
+	</script>
 	<?php endif; ?>
 <?php get_footer(); ?>

@@ -9,15 +9,6 @@ define('TDU', get_bloginfo('template_url'));
 add_theme_support( 'automatic-feed-links' );
 add_theme_support( 'html5', array( 'search-form', 'comment-form', 'comment-list' ) );
 
-register_sidebar(array(
-	'id' => 'right-sidebar',
-	'name' => 'Right Sidebar',
-	'before_widget' => '<div class="widget %2$s" id="%1$s">',
-	'after_widget' => '</div>',
-	'before_title' => '<h3>',
-	'after_title' => '</h3>'
-));
-
 add_theme_support( 'post-thumbnails' );
 /*set_post_thumbnail_size( 604, 270, true );
 add_image_size( 'single-post-thumbnail', 400, 9999, false );*/
@@ -129,12 +120,6 @@ function theme_entry_meta() {
 		);
 	}
 }
-function scripts_method() {
-	wp_deregister_script( 'jquery' );
-	wp_register_script( 'jquery', TDU.'/js/jquery-1.11.1.min.js');
-	wp_enqueue_script( 'jquery' );
-}
-add_action('wp_enqueue_scripts', 'scripts_method');
 
 // register tag [template-url]
 function template_url($text) {
@@ -143,3 +128,166 @@ function template_url($text) {
 add_filter('the_content', 'template_url');
 add_filter('get_the_content', 'template_url');
 add_filter('widget_text', 'template_url');
+
+
+// ==============================================================
+// REQUIRE
+// ==============================================================
+require_once 'includes/__.php';
+require_once 'includes/widgets/WidgetImageBox.php';
+require_once 'includes/widgets/WidgetSocialLinks.php';
+require_once 'includes/widgets/WidgetIconBox.php';
+require_once 'includes/widgets/WidgetPromoText.php';
+
+// ==============================================================
+// Actions and filters
+// ==============================================================
+add_action('widgets_init', 'widgetsInit');
+add_action('wp_enqueue_scripts', 'scriptsAndStyles');
+
+// ==============================================================
+// Control Collections
+// ==============================================================
+$ccollection_contacts = new Controls\ControlsCollection(
+	array(		
+		new Controls\Textarea(
+			'Address', 
+			array(
+				'default-value' => '80 Beaufort st, Mount Lawley. Perth Western Australia',
+				'description'   => 'Your address'
+			), 
+			array('placeholder' => 'Enter your address')
+		),
+		new Controls\Textarea(
+			'Front page text', 
+			array(
+				'default-value' => 'Welcome to Strategic Property Conveyancing, Our professional service will settle your property with peace of mind.',
+				'description'   => 'Featured text'
+			), 
+			array('placeholder' => 'Enter front page text')
+		),
+	)
+);
+
+$ccollection_gmap = new Controls\ControlsCollection(
+	array(		
+		new Controls\Text(
+			'Latitude', 
+			array(
+				'default-value' => '-31.949603',
+				'description'   => 'Latitude from google maps'
+			), 
+			array('placeholder' => 'Enter your Latitude')
+		),
+		new Controls\Text(
+			'Longitude', 
+			array(
+				'default-value' => '115.862642',
+				'description'   => 'Longitude from google maps'
+			), 
+			array('placeholder' => 'Enter your Longitude')
+		),
+		new Controls\Text(
+			'Map height', 
+			array(
+				'default-value' => '540',
+				'description'   => 'Height in pixels'
+			), 
+			array('placeholder' => 'Pixels')
+		),
+	)
+);
+// ==============================================================
+// Sections
+// ==============================================================
+$section_contacts    = new Admin\Section(
+	'Contacts settings', 
+	array(
+		'prefix'   => 'sc_',
+		'tab_icon' => 'fa-book'
+	), 
+	$ccollection_contacts
+);
+
+$section_google_map    = new Admin\Section(
+	'Google map settings', 
+	array(
+		'prefix'   => 'gms_',
+		'tab_icon' => 'fa-map-marker'
+	), 
+	$ccollection_gmap
+);
+// ==============================================================
+// Pages
+// ==============================================================
+$page_settings = new Admin\Page(
+	'Theme setting', 
+	array('parent_page' => 'options-general.php'), 
+	array(
+		$section_contacts,
+		$section_google_map
+	)
+);
+// ==============================================================
+// Other classes
+// ==============================================================
+$gmap = new GMap();
+
+//                    __  __              __    
+//    ____ ___  ___  / /_/ /_  ____  ____/ /____
+//   / __ `__ \/ _ \/ __/ __ \/ __ \/ __  / ___/
+//  / / / / / /  __/ /_/ / / / /_/ / /_/ (__  ) 
+// /_/ /_/ /_/\___/\__/_/ /_/\____/\__,_/____/  
+//                                              
+/**
+ * Register custom sidebar
+ */
+function widgetsInit()
+{
+	register_sidebar(
+		array(
+			'id'            => 'main-right-sidebar',
+			'name'          => 'Main right sidebar',
+			'before_widget' => '<div class="b-box-info %2$s" id="%1$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h1>',
+			'after_title'   => '</h1>'
+		)
+	);
+
+	register_sidebar(
+		array(
+			'id'            => 'main-footer-sidebar',
+			'name'          => 'Main footer sidebar',
+			'before_widget' => '<div class="b-box-info %2$s" id="%1$s">',
+			'after_widget'  => '</div>',
+			'before_title'  => '<h1>',
+			'after_title'   => '</h1>'
+		)
+	);
+
+	register_sidebar(
+		array(
+			'id'            => 'internal-right-sidebar',
+			'name'          => 'Internal right sidebar',
+			'before_widget' => '<aside class="b-box-info %2$s" id="%1$s">',
+			'after_widget'  => '</aside>',
+			'before_title'  => '<h1>',
+			'after_title'   => '</h1>'
+		)
+	);
+
+	register_widget('WidgetImageBox');
+	register_widget('WidgetSocialLinks');
+	register_widget('WidgetIconBox');
+	register_widget('WidgetPromoText');
+}
+
+function scriptsAndStyles() 
+{
+	wp_deregister_script( 'jquery' );
+	wp_register_script( 'jquery', TDU.'/js/jquery-1.11.1.min.js');
+	wp_enqueue_script( 'jquery' );
+	wp_enqueue_script( 'google_map', 'https://maps.googleapis.com/maps/api/js?v=3.exp' );
+	wp_enqueue_style('for_scripts', TDU.'/css/for_scripts.css');
+}
