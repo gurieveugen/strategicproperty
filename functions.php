@@ -222,7 +222,10 @@ $section_google_map    = new Admin\Section(
 // ==============================================================
 $page_settings = new Admin\Page(
 	'Theme setting', 
-	array('parent_page' => 'options-general.php'), 
+	array(
+		'parent_page' => 'options-general.php',
+		'capability'  => 'edit_others_posts',
+	), 
 	array(
 		$section_contacts,
 		$section_google_map
