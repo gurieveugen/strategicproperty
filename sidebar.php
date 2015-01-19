@@ -5,7 +5,7 @@
  */
 ?>
 <?php if ( is_active_sidebar( 'internal-right-sidebar' ) ) : ?>
-	<div class="main-sidebar right">
+	<div id="sidebar" class="main-sidebar right">
 		<?php dynamic_sidebar( 'internal-right-sidebar' ); ?>
 	</div>
 <?php endif; ?>
